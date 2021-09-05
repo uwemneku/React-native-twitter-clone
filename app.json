@@ -5,6 +5,9 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
+    ],
+    "plugins": [
+      "react-native-vision-camera"
     ]
   },
   "name": "twitter"
