@@ -3,6 +3,7 @@ import { StyleSheet, Pressable } from 'react-native'
 import Animated, { useAnimatedStyle, useSharedValue, withTiming, withSequence, Easing} from 'react-native-reanimated'
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { useTheme } from '@react-navigation/native';
+import { useDrawerStatus } from '@react-navigation/drawer';
 
 const FAB = ({isTweet=true, text}) => {
     // const [isTweet, setIsTweet] = useState(true)
@@ -28,7 +29,7 @@ const FAB = ({isTweet=true, text}) => {
 
 
     return (
-        <Animated.View style={[style, {position: 'absolute', right:20, bottom: 70, zIndex:10000}]} >
+        <Animated.View style={[style, {position: 'absolute', right:20, bottom: 70,}]} >
             <Pressable style={[styles.container, {backgroundColor : colors.primary}]} >
                 {
                     isTweet ?
@@ -52,5 +53,6 @@ const styles = StyleSheet.create({
         elevation:3 ,
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex:1
     }
 })

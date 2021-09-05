@@ -1,16 +1,22 @@
 import React from 'react'
-import { StyleSheet, Text, View, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, Pressable } from 'react-native'
 import Avatar from './Avatar'
 import { Fontisto, SimpleLineIcons } from '@expo/vector-icons';
 import Typography from './Typography';
 import { useTheme } from '@react-navigation/native';
 
-const AppHeader = ({route}) => {
+const AppHeader = ({route, navigation}) => {
     const isHome = route.name === 'Home'
     const {colors} = useTheme()
+
+    const handleAvatarPress = () => {
+        navigation.toggleDrawer();
+    }
     return (
         <View style={styles.container}>
-            <Avatar size={40} />
+            <Pressable onPress={handleAvatarPress} >
+                <Avatar size={40} />
+            </Pressable>
 
             <View style={{flex: 1, alignItems:'center'}} >
                 {isHome && <Fontisto name="twitter" size={24} color={colors.primary} />}

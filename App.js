@@ -1,10 +1,9 @@
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import FAB from './src/components/FAB';
-import BottomTabNavigator from './src/Navigation.js/BottomTabNavigation';
+import DrawerNavigation from './src/Navigation.js/DrawerNavigation';
+import { PortalHost, PortalProvider } from '@gorhom/portal';
 
 const MyTheme = {
   ...DefaultTheme,
@@ -12,6 +11,7 @@ const MyTheme = {
     ...DefaultTheme.colors,
     primary: 'rgb(29, 161, 242)',
     card: 'rgb(225, 232, 237)',
+    text: 'rgb(101, 119, 134)',
   },
 };
 
@@ -19,9 +19,11 @@ const MyTheme = {
 export default function App() {
   return (
     <SafeAreaView style={styles.container} >
-      <NavigationContainer theme={MyTheme} >
-          <BottomTabNavigator />
-      </NavigationContainer>
+      <PortalProvider>
+        <NavigationContainer theme={MyTheme} >
+            <DrawerNavigation />
+        </NavigationContainer>
+      </PortalProvider>
     </SafeAreaView>
   );
 }
@@ -32,5 +34,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+
   },
 });

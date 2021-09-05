@@ -17,35 +17,34 @@ const BottomTab = createBottomTabNavigator()
 const screens = [
     {
         name:'Home',
-        icon:(color, isFocused)=> <Ionicons name={isFocused ?"home" : "home-outline"} size={isFocused ? 30 : 24} color="black" />,
+        icon:(color, isFocused)=> <Ionicons name={isFocused ?"home" : "home-outline"} size={isFocused ? 28 : 24} color="black" />,
         component: Home
     },
     {
         name:'Search',
-        icon:(color, isFocused)=> <Ionicons name={isFocused ?"search-sharp" : "search-outline"} size={isFocused ? 30 : 24} color="black" />,
+        icon:(color, isFocused)=> <Ionicons name={isFocused ?"search-sharp" : "search-outline"} size={isFocused ? 28 : 24} color="black" />,
         component: Search
     },
     {
         name:'Notifications',
-        icon:(color, isFocused)=> <Ionicons name={isFocused ? "notifications-sharp" : "notifications-outline"} size={isFocused ? 30 : 24} color="black" />,
+        icon:(color, isFocused)=> <Ionicons name={isFocused ? "notifications-sharp" : "notifications-outline"} size={isFocused ? 28 : 24} color="black" />,
         component: Notifications
     },
     {
         name:'Messages',
-        icon:(color, isFocused)=> <Feather name="message-square" size={isFocused ? 30 : 24} color="black" />,
+        icon:(color, isFocused)=> <MaterialCommunityIcons name={isFocused ? "message-reply" : "message-outline"} size={isFocused ? 28 : 24} color="black" />,
         component: Messages
     },
 ]
 
 const BottomTabNavigator = () => {
     return (
-        <PortalProvider>
             <View style={styles.container} >
                 <BottomTab.Navigator  
                     initialRouteName='Home'
                     screenOptions={{
                         header:({navigation, options, route}) => {
-                            return <AppHeader route={route} />
+                            return <AppHeader route={route} navigation={navigation} />
                         }
                     }}
                     tabBar={({navigation, state})=>{
@@ -58,7 +57,12 @@ const BottomTabNavigator = () => {
                                         const color = isFocused ? 'green' : 'gray'
                                         return (
                                             <View key={item.name}  >
-                                                { index === 1 && <Portal name='FAB' ><FAB isTweet={state.index !== 3} /></Portal>}
+                                                { 
+                                                    index === 1 && 
+                                                    <Portal  hostName="FAB" >
+                                                        <FAB isTweet={state.index !== 3} />
+                                                    </Portal>
+                                                }
                                                 <Pressable onPress={()=>navigation.navigate(item.name)} style={{justifyContent: 'center', alignItems: 'center', padding: 10,}}>
                                                     {item.icon(color, isFocused)}
                                                 </Pressable>
@@ -87,7 +91,6 @@ const BottomTabNavigator = () => {
                 </BottomTab.Navigator>
                 <PortalHost name="FAB" />
             </View>
-        </PortalProvider>
     )
 }
 
@@ -102,7 +105,7 @@ const styles = StyleSheet.create({
     },
     tabBarContainer:{
         backgroundColor:'white',
-        height: 60,
+        height: 50,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
